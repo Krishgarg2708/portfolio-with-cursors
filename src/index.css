@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --color-primary: #a855f7;
+  --color-secondary: #3b82f6;
+  --color-accent: #06b6d4;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-950 text-slate-200 antialiased selection:bg-purple-500/30 selection:text-purple-200;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10;
+  }
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-linear-to-r from-purple-400 via-blue-400 to-cyan-400;
+  }
+  .gradient-border {
+    @apply border border-transparent bg-linear-to-r from-purple-500/50 to-blue-500/50 bg-origin-border;
+  }
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-950;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-800 rounded-full hover:bg-slate-700 transition-colors;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ═══════════ Multiplayer cursor layer ═══════════ */
+.mc-layer { position: absolute; left: 0; top: 0; width: 100%; height: 0; pointer-events: none; z-index: 60; }
+.mc-cursor { position: absolute; left: 0; top: 0; will-change: transform; }
+.mc-trail { position: absolute; left: 0; top: 0; width: 7px; height: 7px; border-radius: 9999px; opacity: 0; will-change: transform, opacity; }
+.mc-label { position: absolute; white-space: nowrap; border-radius: 9999px 9999px 9999px 5px; padding: 5px 11px; font: 600 13px/1.2 "Inter", system-ui, sans-serif; color: #fff; box-shadow: 0 8px 20px -8px rgb(0 0 0 / .6); transform-origin: 0 0; }
+.mc-label small { font-weight: 500; opacity: .85; margin-left: 4px; font-size: 11px; }
+.mc-bubble { position: absolute; white-space: nowrap; border-radius: 16px 16px 16px 4px; background: #fff; color: #0f172a; padding: 6px 12px; font: 500 13px/1.2 "Inter", system-ui, sans-serif; box-shadow: 0 12px 30px -10px rgb(0 0 0 / .6); }
+.mc-ripple { position: absolute; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 9999px; border: 2px solid currentColor; pointer-events: none; }
+.mc-frame { position: absolute; border: 1.5px solid; pointer-events: none; }
+.mc-frame > i { position: absolute; width: 8px; height: 8px; background: #fff; border: 1.5px solid; }
+.mc-frame > b { position: absolute; left: -1.5px; top: -24px; color: #fff; font: 500 10px "Space Grotesk", ui-monospace, monospace; padding: 3px 7px; border-radius: 4px; white-space: nowrap; }
+.mc-tap { position: absolute; left: 0; top: 0; }
+.mc-tap .mc-label { left: 10px; top: 12px; font-size: 11px; padding: 3px 9px; }
+.mc-you { display: block; border-radius: 9999px 9999px 9999px 5px; background: #fff; color: #0f172a; padding: 4px 10px; font: 600 12px/1.2 "Inter", system-ui, sans-serif; box-shadow: 0 8px 20px -8px rgb(0 0 0 / .6); }
+.you-tag { position: fixed; left: 0; top: 0; z-index: 10000; pointer-events: none; will-change: transform; }
+
+/* selection outline while a collaborator hovers / holds an element */
+[data-piece].mc-hovered { outline: 1.5px dashed var(--sel); outline-offset: 6px; }
+[data-piece].mc-held { outline: 1.5px solid var(--sel); outline-offset: 6px; }
+[data-drag] { cursor: grab; }
+[data-drag]:active { cursor: grabbing; }
